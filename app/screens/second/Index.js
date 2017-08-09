@@ -10,16 +10,16 @@ export default class Home extends React.Component {
 		};
 	}
 
-  render() {
+	render() {
 		const message = this.state.message;
-    return (
-      <View style={styles.container}>
+		return (
+			<View style={styles.container}>
 				<Text>Welcome to the 2nd screen!</Text>
 				<Text>{message}</Text>
-        <Button onPress={() => this.onclick()} title={`Hello From ${this.props.navigation.state.params.item.title}`} />
-      </View>
-    );
-  }
+				<Button onPress={() => this.onclick()} title={`Hello From ${this.props.navigation.state.params.item.title}`} />
+			</View>
+		);
+	}
 
 	onclick() {
 		this.setState({
@@ -29,10 +29,10 @@ export default class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });

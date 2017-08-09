@@ -33,8 +33,7 @@ export default class Home extends React.Component {
 			<FlatList
 				data={this.state.notes}
 				style={styles.list}
-				renderItem={(props) => this.renderListItem(props)}
-				/>
+				renderItem={(props) => this.renderListItem(props)} />
 		);
 	}
 
@@ -52,8 +51,8 @@ export default class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  list: {
-  },
+	list: {
+	},
 	item: {
 		padding: 16,
 		borderBottomWidth: StyleSheet.hairlineWidth,
