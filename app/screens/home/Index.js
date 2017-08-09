@@ -5,19 +5,19 @@ import {
   Text,
   View
 } from 'react-native';
+import NoteTable from './NoteTable.js'
 
 export default class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-				<Button onPress={() => this.onclick()} title="Next"></Button>
-      </View>
+			<NoteTable
+				onItemPress={(props) => this.onItemPress(props)} />
     );
   }
 
-	onclick() {
+	onItemPress({item}) {
 		const { navigate } = this.props.navigation;
-		navigate('Second');
+		navigate('Second', {item});
 	}
 }
 
