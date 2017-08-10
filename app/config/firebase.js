@@ -2,6 +2,8 @@ import firebase from 'firebase';
 import cred from '../../cred.json';
 
 export default {
+	_initialized: false,
+
 	get _auth() {
 		return firebase.auth();
 	},
@@ -16,6 +18,13 @@ export default {
 	},
 
 	init() {
+		if (this._initialized) {
+			console.log('# firebase has been already initialized.');
+			return;
+		}
+
+		this._initialized = true;
+
 		firebase.initializeApp({
 			apiKey: `${cred.API_KEY}`,
 			authDomain: `${cred.PROJECT_ID}.firebaseapp.com`,
