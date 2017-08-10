@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import TextArea from './TextArea.js';
 import firebase from '../../config/firebase.js';
+import { NavigationActions } from 'react-navigation'
 
 export default class SignIn extends Component {
 	constructor(props) {
@@ -46,7 +47,15 @@ export default class SignIn extends Component {
 	submit() {
 		console.log('# submit', this.state);
 		firebase.signIn(this.state.email, this.state.password)
-			.then(user => this.props.onSignIn())
+			.then(user => {
+				const resetAction = NavigationActions.reset({
+					index: 0,
+					actions: [
+						NavigationActions.navigate({ routeName: 'Home' }),
+					],
+				});
+				this.props.navigation.dispatch(resetAction);
+			})
 			.catch(error => {
 				// TODO show error for users
 				console.log('# submit: failed', error);

@@ -3,8 +3,16 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import Home from '../screens/home/Index.js';
 import Second from '../screens/second/Index.js';
+import SignIn from '../screens/SignIn/Index.js';
 
 export default StackNavigator({
+	SignIn: {
+		screen: SignIn,
+		navigationOptions: {
+			header: null,
+		},
+	},
+
 	Home: {
 		screen: Home,
 		navigationOptions: {
@@ -14,4 +22,6 @@ export default StackNavigator({
 	Second: {
 		screen: Second,
 	},
+}, {
+	initialRouteName: "SignIn",
 });
