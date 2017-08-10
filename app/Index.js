@@ -1,12 +1,15 @@
 import React from 'react';
 import Root from './config/router.js';
 import SignIn from './screens/SignIn/Index.js';
+import firebase from './config/firebase.js';
 
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+		firebase.init();
+
 		this.state = {
-			signedIn: false,
+			signedIn: firebase.signedIn,
 		};
 	}
 

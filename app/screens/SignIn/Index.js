@@ -7,6 +7,7 @@ import {
 	View
 } from 'react-native';
 import TextArea from './TextArea.js';
+import firebase from '../../config/firebase.js';
 
 export default class SignIn extends Component {
 	constructor(props) {
@@ -20,6 +21,7 @@ export default class SignIn extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<Text>{this.props.text}</Text>
 				<TextArea
 					style={styles.textArea}
 					label="Email"
@@ -43,7 +45,12 @@ export default class SignIn extends Component {
 
 	submit() {
 		console.log('# submit', this.state);
-		this.props.onSignIn();
+		firebase.signIn(this.state.email, this.state.password)
+			.then(user => this.props.onSignIn())
+			.catch(error => {
+				// TODO show error for users
+				console.log('# submit: failed', error);
+			});
 	}
 }
 
