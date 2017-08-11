@@ -6,6 +6,7 @@ import ReactNative, {
 	TouchableHighlight,
 } from 'react-native';
 
+import firebase from '../../config/firebase.js';
 import Note from '../../models/Note.js';
 
 export default class Home extends React.Component {
@@ -19,10 +20,9 @@ export default class Home extends React.Component {
 	}
 
 	componentWillMount() {
-		const user = null;
+		const user = firebase.user;
 		Note.fetchAllFor(user)
 			.then(notes => this.setState({ loading: false, notes: notes }))
-			.then(notes => console.log('# Note::fetchAllFor', notes));
 	}
 
 	render() {
