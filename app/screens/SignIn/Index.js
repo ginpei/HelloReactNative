@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+	ActivityIndicator,
 	TextInput,
 	StyleSheet,
 	Text,
@@ -14,6 +15,7 @@ export default class SignIn extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			loading: true,
 			email: 'anonymous@example.com',
 			password: '123123',
 		};
@@ -25,10 +27,21 @@ export default class SignIn extends Component {
 				if (firebase.signedIn) {
 					this.goToTop();
 				}
+				else {
+					this.setState({ loading: false });
+				}
 			});
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<View style={styles.container}>
+					<ActivityIndicator />
+				</View>
+			);
+		}
+
 		return (
 			<View style={styles.container}>
 				<Text>{this.props.text}</Text>
@@ -55,9 +68,12 @@ export default class SignIn extends Component {
 
 	submit() {
 		console.log('# submit', this.state);
+
+		this.setState({ loading: true });
 		firebase.signIn(this.state.email, this.state.password)
 			.then(user => this.goToTop())
 			.catch(error => {
+				this.setState({ loading: false });
 				// TODO show error for users
 				console.log('# submit: failed', error);
 			});
