@@ -5,6 +5,7 @@ import {
 	Text,
 	View
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 import firebase from '../../config/firebase.js';
 
@@ -23,7 +24,17 @@ export default class Account extends Component {
 
 	signOut() {
 		firebase.signOut();
-		this.props.navigation.navigate('SignIn');
+		this.goToSignIn();
+	}
+
+	goToSignIn() {
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({ routeName: 'SignIn' }),
+			],
+		});
+		this.props.navigation.dispatch(resetAction);
 	}
 }
 
