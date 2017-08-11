@@ -6,8 +6,9 @@ import {
 	View
 } from 'react-native';
 import NoteTable from './NoteTable.js'
+import { DrawerNavigator } from 'react-navigation';
 
-export default class Home extends Component {
+class Home extends Component {
 	render() {
 		return (
 			<NoteTable
@@ -20,6 +21,35 @@ export default class Home extends Component {
 		navigate('Second', {item});
 	}
 }
+
+class Next extends Component {
+	render() {
+		return (
+			<View>
+				<Text>Next</Text>
+			</View>
+		);
+	}
+}
+
+export default DrawerNavigator({
+	Main: {
+		screen: Home,
+		navigationOptions(props) {
+			return {
+				headerLeft: (
+					<Button
+						title="≡"
+						onPress={() => props.navigation.navigate('DrawerOpen')}
+						/>
+				),
+			};
+		},
+	},
+	Next: {
+		screen: Next,
+	},
+});
 
 const styles = StyleSheet.create({
 	container: {
