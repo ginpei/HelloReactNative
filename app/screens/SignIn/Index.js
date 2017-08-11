@@ -11,6 +11,7 @@ import TextArea from './TextArea.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
 import ShortMessage from '../../views/ShortMessage/Index.js';
+import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 
 export default class SignIn extends Component {
 	constructor(props) {
@@ -36,11 +37,7 @@ export default class SignIn extends Component {
 
 	render() {
 		if (this.state.loading) {
-			return (
-				<View style={styles.container}>
-					<ActivityIndicator />
-				</View>
-			);
+			return <LoadingIndicator />;
 		}
 
 		return (

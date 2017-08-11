@@ -8,6 +8,7 @@ import ReactNative, {
 
 import firebase from '../../config/firebase.js';
 import Note from '../../models/Note.js';
+import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 
 export default class Home extends React.Component {
 	constructor() {
@@ -26,6 +27,10 @@ export default class Home extends React.Component {
 	}
 
 	render() {
+		if (this.state.loading) {
+			return <LoadingIndicator />;
+		}
+
 		return (
 			<FlatList
 				data={this.state.notes}
