@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
-import Home from '../screens/home/Index.js';
+import Home from '../screens/Home/Index.js';
 import Second from '../screens/second/Index.js';
 import SignIn from '../screens/SignIn/Index.js';
 
