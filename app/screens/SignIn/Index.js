@@ -10,6 +10,7 @@ import {
 import TextArea from './TextArea.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
+import ShortMessage from '../../views/ShortMessage/Index.js';
 
 export default class SignIn extends Component {
 	constructor(props) {
@@ -73,9 +74,11 @@ export default class SignIn extends Component {
 		firebase.signIn(this.state.email, this.state.password)
 			.then(user => this.goToTop())
 			.catch(error => {
-				this.setState({ loading: false });
-				// TODO show error for users
 				console.log('# submit: failed', error);
+				this.setState({ loading: false });
+
+				const message = `Failed to sign in; ${error.message}`;
+				ShortMessage.show(message);
 			});
 	}
 
