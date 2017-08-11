@@ -51,7 +51,7 @@ export default class SignIn extends Component {
 				const resetAction = NavigationActions.reset({
 					index: 0,
 					actions: [
-						NavigationActions.navigate({ routeName: 'Home' }),
+						NavigationActions.navigate({ routeName: 'Top' }),
 					],
 				});
 				this.props.navigation.dispatch(resetAction);

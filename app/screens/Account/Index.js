@@ -5,14 +5,13 @@ import {
 	Text,
 	View
 } from 'react-native';
-import NoteTable from './NoteTable.js'
-import { DrawerNavigator } from 'react-navigation';
 
-export default class Home extends Component {
+export default class Account extends Component {
 	render() {
 		return (
-			<NoteTable
-				onItemPress={(props) => this.onItemPress(props)} />
+			<View style={styles.container}>
+				<Text>Account</Text>
+			</View>
 		);
 	}
 
