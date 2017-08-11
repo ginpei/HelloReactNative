@@ -16,8 +16,8 @@ export default class Note {
 
 	static fetchAllFor(user) {
 		const query = Note.db.orderByChild('userId').equalTo(user.uid)
-		return query.once('value').then(function(snapshot) {
-			const noteDataMap = snapshot.val();
+		return query.once('value').then(snapshot => {
+			const noteDataMap = snapshot.val() || {};
 			const notes = Object.keys(noteDataMap).map(key => {
 				const data = noteDataMap[key];
 				const note = new Note(key, data);
