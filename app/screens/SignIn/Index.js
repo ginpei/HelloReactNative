@@ -17,6 +17,10 @@ export default class SignIn extends Component {
 			email: 'anonymous@example.com',
 			password: '123123',
 		};
+
+		if (firebase.signedIn) {
+			this.goToTop();
+		}
 	}
 
 	render() {
@@ -47,19 +51,21 @@ export default class SignIn extends Component {
 	submit() {
 		console.log('# submit', this.state);
 		firebase.signIn(this.state.email, this.state.password)
-			.then(user => {
-				const resetAction = NavigationActions.reset({
-					index: 0,
-					actions: [
-						NavigationActions.navigate({ routeName: 'Top' }),
-					],
-				});
-				this.props.navigation.dispatch(resetAction);
-			})
+			.then(user => this.goToTop())
 			.catch(error => {
 				// TODO show error for users
 				console.log('# submit: failed', error);
 			});
+	}
+
+	goToTop() {
+		const resetAction = NavigationActions.reset({
+			index: 0,
+			actions: [
+				NavigationActions.navigate({ routeName: 'Top' }),
+			],
+		});
+		this.props.navigation.dispatch(resetAction);
 	}
 }
 

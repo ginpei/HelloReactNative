@@ -53,11 +53,13 @@ export default {
 
 		const p = this._auth.signInWithEmailAndPassword(email, password);
 		p.then(user => console.log('# auth: signIn', user));
+		p.then(user => this._user = user);
 		p.catch(error => console.warn('# auth: signIn', error));
 		return p;
 	},
 
 	signOut() {
+		this._user = null;
 		return this._auth.signOut();
 	},
 

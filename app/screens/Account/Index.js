@@ -6,18 +6,24 @@ import {
 	View
 } from 'react-native';
 
+import firebase from '../../config/firebase.js';
+
 export default class Account extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<Text>Account</Text>
+				<Button
+					title="Sign Out"
+					onPress={() => this.signOut()}
+					/>
 			</View>
 		);
 	}
 
-	onItemPress({item}) {
-		const { navigate } = this.props.navigation;
-		navigate('Second', {item});
+	signOut() {
+		firebase.signOut();
+		this.props.navigation.navigate('SignIn');
 	}
 }
 
