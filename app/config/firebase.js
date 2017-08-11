@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import cred from '../../cred.json';
 
@@ -31,15 +32,11 @@ export default {
 			databaseURL: `https://${cred.PROJECT_ID}.firebaseio.com`,
 			storageBucket: `${cred.PROJECT_ID}.appspot.com`,
 		});
-
-		this._initAuth();
 	},
 
-	_initAuth() {
-		this._auth.onAuthStateChanged(function(user) {
-			console.log('# onAuthStateChanged', user);
-			this._user = user;
-		});
+	initAuth() {
+		return this._loadSignedInUser()
+			.then(user => console.log('# firebase._initAuth: User loaded (maybe null).', user));
 	},
 
 	signIn(email, password) {
@@ -53,14 +50,30 @@ export default {
 
 		const p = this._auth.signInWithEmailAndPassword(email, password);
 		p.then(user => console.log('# auth: signIn', user));
-		p.then(user => this._user = user);
+		p.then(user => this._saveSignedInUser(user))
 		p.catch(error => console.warn('# auth: signIn', error));
 		return p;
 	},
 
 	signOut() {
-		this._user = null;
+		this._saveSignedInUser(null);
 		return this._auth.signOut();
+	},
+
+	_saveSignedInUser(user) {
+		console.log('# firebase._saveSignedInUser', user);
+		this._user = user;
+		AsyncStorage.setItem('user', JSON.stringify(user));
+	},
+
+	_loadSignedInUser() {
+		const p = AsyncStorage.getItem('user')
+			.then(json => {
+				const user = JSON.parse(json);
+				this._user = user;
+				return user;
+			});
+		return p;
 	},
 
 	ERRORS: {

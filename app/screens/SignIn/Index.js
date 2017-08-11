@@ -17,10 +17,15 @@ export default class SignIn extends Component {
 			email: 'anonymous@example.com',
 			password: '123123',
 		};
+	}
 
-		if (firebase.signedIn) {
-			this.goToTop();
-		}
+	componentWillMount() {
+		firebase.initAuth()
+			.then(_ => {
+				if (firebase.signedIn) {
+					this.goToTop();
+				}
+			});
 	}
 
 	render() {
