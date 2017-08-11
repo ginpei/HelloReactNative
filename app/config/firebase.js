@@ -9,6 +9,10 @@ export default {
 		return firebase.auth();
 	},
 
+	get db() {
+		return firebase.database();
+	},
+
 	_user: null,
 	get user() {
 		return this._user;
