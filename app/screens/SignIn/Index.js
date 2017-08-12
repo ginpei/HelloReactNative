@@ -7,7 +7,7 @@ import {
 	Button,
 	View
 } from 'react-native';
-import TextArea from './TextArea.js';
+import TitledTextInput from '../../views/TitledTextInput/Index.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
 import ShortMessage from '../../views/ShortMessage/Index.js';
@@ -43,14 +43,14 @@ export default class SignIn extends Component {
 		return (
 			<View style={styles.container}>
 				<Text>{this.props.text}</Text>
-				<TextArea
-					style={styles.textArea}
+				<TitledTextInput
+					style={styles.titledTextInput}
 					label="Email"
 					value={this.state.email}
 					onChangeText={(text) => this.setState({ email: text })}
 					/>
-				<TextArea
-					style={styles.textArea}
+				<TitledTextInput
+					style={styles.titledTextInput}
 					label="Password"
 					value={this.state.password}
 					secureTextEntry={true}
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		margin: '5%',
 	},
-	textArea: {
+	titledTextInput: {
 		width: '100%',
 	},
 });

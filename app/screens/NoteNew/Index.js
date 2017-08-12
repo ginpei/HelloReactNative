@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
+import TitledTextInput from '../../views/TitledTextInput/Index.js';
+
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			title: '',
 		};
 	}
 
@@ -12,7 +15,11 @@ export default class Home extends React.Component {
 		const message = this.state.message;
 		return (
 			<View style={styles.container}>
-				<Text>New Note</Text>
+				<TitledTextInput
+					label="Title"
+					value={this.state.title}
+					onChangeText={title => this.setState({ title })}
+					/>
 			</View>
 		);
 	}
