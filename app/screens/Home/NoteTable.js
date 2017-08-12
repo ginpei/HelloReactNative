@@ -23,14 +23,15 @@ export default class Home extends React.Component {
 		);
 	}
 
-	renderListItem({item}) {
+	renderListItem(info) {
+		const note = info.item;
 		return (
 			<TouchableHighlight
-				title={item.title}
-				style={styles.item}
-				onPress={() => this.props.onItemPress({item})}>
+				title={note.title}
+				style={styles.note}
+				onPress={() => this.props.onItemPress({note})}>
 
-				<Text>{item.title}</Text>
+				<Text>{note.title}</Text>
 			</TouchableHighlight>
 		);
 	}
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
 	list: {
 		backgroundColor: '#fff',
 	},
-	item: {
+	note: {
 		padding: 16,
 		borderBottomWidth: StyleSheet.hairlineWidth,
 	},

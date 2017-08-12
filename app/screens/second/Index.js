@@ -16,7 +16,7 @@ export default class Home extends React.Component {
 			<View style={styles.container}>
 				<Text>Welcome to the 2nd screen!</Text>
 				<Text>{message}</Text>
-				<Button onPress={() => this.onclick()} title={`Hello From ${this.props.navigation.state.params.item.title}`} />
+				<Button onPress={() => this.onclick()} title={`Hello From ${this.props.navigation.state.params.note.title}`} />
 			</View>
 		);
 	}
