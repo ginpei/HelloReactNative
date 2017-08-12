@@ -5,6 +5,7 @@ import TitledTextInput from '../../views/TitledTextInput/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 import ShortMessage from '../../views/ShortMessage/Index.js';
 import Note from '../../models/Note.js';
+import firebase from '../../config/firebase.js';
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -47,9 +48,15 @@ export default class Home extends React.Component {
 		this.setState({ loading: true });
 
 		const { title, description } = this.state;
-		const note = new Note({ title, description });
+		const note = new Note({
+			description,
+			title,
+			userId: firebase.user.uid,
+		});
 		note.save()
 			.then(_ => {
+				ShortMessage.show('Created a new note.');
+				this.props.navigation.goBack();
 			})
 			.catch(error => {
 				this.setState({ loading: false });

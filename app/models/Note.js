@@ -1,8 +1,8 @@
 import firebase from '../config/firebase.js';
 
 export default class Note {
-	constructor(key, data = {}) {
-		this.key = key;
+	constructor(data = {}) {
+		this.key = data.key || null;
 		this.userId = data.userId || '';
 		this.title = data.title || '';
 		this.description = data.description || '';
@@ -11,8 +11,27 @@ export default class Note {
 	}
 
 	save() {
-		// TODO implement
-		return new Promise((_, reject) => setTimeout(_ => reject({ message: 'Wow' }), 1000));
+		if (!this.userId) {
+			return Promise.reject(new Error('User ID is not set.'));
+		}
+
+		const updates = this._prepareDataPushing({
+			createdAt: this.createdAt || Date.now(),
+			description: this.description,
+			title: this.title,
+			updatedAt: Date.now(),
+			userId: this.userId,
+		});
+		console.log('# save', updates);
+
+		return Note.db.update(updates);
+	}
+
+	_prepareDataPushing(data) {
+		const key = this.key || Note.db.push().key;
+		const names = Object.keys(data);
+		const updates = names.reduce((updates, name) => (updates[`${key}/${name}`] = data[name], updates), {})
+		return updates;
 	}
 
 	static get db() {
@@ -25,7 +44,8 @@ export default class Note {
 			const noteDataMap = snapshot.val() || {};
 			const notes = Object.keys(noteDataMap).map(key => {
 				const data = noteDataMap[key];
-				const note = new Note(key, data);
+				data.key = key;
+				const note = new Note(data);
 				return note;
 			});
 
