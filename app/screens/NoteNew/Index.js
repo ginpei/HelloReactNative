@@ -1,5 +1,6 @@
 import React from 'react';
 
+import BasicScreen from '../../views/BasicScreen/Index.js';
 import NoteForm from '../../views/NoteForm/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 import ShortMessage from '../../views/ShortMessage/Index.js';
@@ -26,13 +27,15 @@ export default class NoteNew extends React.Component {
 		}
 
 		return (
-			<NoteForm
-				description={this.state.description}
-				isNew={false}
-				title={this.state.title}
-				onChange={updates => this.setState(updates)}
-				onSubmit={() => this.create()}
-				/>
+			<BasicScreen>
+				<NoteForm
+					description={this.state.description}
+					isNew={false}
+					title={this.state.title}
+					onChange={updates => this.setState(updates)}
+					onSubmit={() => this.create()}
+					/>
+			</BasicScreen>
 		);
 	}
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-import BasicScreen from '../../views/BasicScreen/Index.js';
 import TitledTextInput from '../../views/TitledTextInput/Index.js';
 
 export default class NoteForm extends React.Component {
 	render() {
 		return (
-			<BasicScreen>
+			<View style={this.props.style}>
 				<TitledTextInput
 					label="Title"
 					value={this.props.title}
@@ -22,7 +21,7 @@ export default class NoteForm extends React.Component {
 					title={this.props.isNew ? 'Create' : 'Update'}
 					onPress={() => this.props.onSubmit()}
 					/>
-			</BasicScreen>
+			</View>
 		);
 	}
 }

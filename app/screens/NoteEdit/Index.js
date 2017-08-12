@@ -1,5 +1,7 @@
 import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
 
+import BasicScreen from '../../views/BasicScreen/Index.js';
 import NoteForm from '../../views/NoteForm/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 import ShortMessage from '../../views/ShortMessage/Index.js';
@@ -27,13 +29,21 @@ export default class NoteEdit extends React.Component {
 		}
 
 		return (
-			<NoteForm
-				description={this.state.description}
-				isNew={false}
-				title={this.state.title}
-				onChange={updates => this.setState(updates)}
-				onSubmit={() => this.update()}
-				/>
+			<BasicScreen>
+				<NoteForm
+					description={this.state.description}
+					isNew={false}
+					title={this.state.title}
+					style={styles.form}
+					onChange={updates => this.setState(updates)}
+					onSubmit={() => this.update()}
+					/>
+				<Button
+					color="#f00"
+					title="Delete"
+					onPress={() => console.log('# delete')}
+					/>
+			</BasicScreen>
 		);
 	}
 
@@ -55,3 +65,9 @@ export default class NoteEdit extends React.Component {
 			});
 	}
 }
+
+const styles = StyleSheet.create({
+	form: {
+		marginBottom: 50,
+	},
+});
