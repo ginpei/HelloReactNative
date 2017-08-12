@@ -33,7 +33,7 @@ export default class Home extends React.Component {
 					<TitledTextInput
 						label="Description (Optional)"
 						value={this.state.description}
-						onChangeText={title => this.setState({ title })}
+						onChangeText={description => this.setState({ description })}
 						/>
 					<Button
 						title="Create"
