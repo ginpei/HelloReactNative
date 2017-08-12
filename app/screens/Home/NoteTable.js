@@ -9,6 +9,7 @@ import ReactNative, {
 import firebase from '../../config/firebase.js';
 import Note from '../../models/Note.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
+import ShortMessage from '../../views/ShortMessage/Index.js';
 
 export default class Home extends React.Component {
 	constructor() {
@@ -24,6 +25,10 @@ export default class Home extends React.Component {
 		const user = firebase.user;
 		Note.fetchAllFor(user)
 			.then(notes => this.setState({ loading: false, notes: notes }))
+			.catch(error => {
+				console.warn(' # NoteTable.componentWillMount - failed to fetch notes', error);
+				ShortMessage.show(`Failed to fetch notes: ${error && error.message}`);
+			});
 	}
 
 	render() {
