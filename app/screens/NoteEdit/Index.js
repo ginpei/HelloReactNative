@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Alert, Button, StyleSheet, View } from 'react-native';
 
 import BasicScreen from '../../views/BasicScreen/Index.js';
 import NoteForm from '../../views/NoteForm/Index.js';
@@ -41,7 +41,7 @@ export default class NoteEdit extends React.Component {
 				<Button
 					color="#f00"
 					title="Delete"
-					onPress={() => console.log('# delete')}
+					onPress={() => this.askDelete()}
 					/>
 			</BasicScreen>
 		);
@@ -62,6 +62,27 @@ export default class NoteEdit extends React.Component {
 			.catch(error => {
 				this.setState({ loading: false });
 				ShortMessage.show(`Failed to update a note: ${error && error.message}`);
+			});
+	}
+
+	askDelete() {
+		const title = null;
+		const message = 'Are you sure you want to delete this note?';
+		const buttons = [
+			{ text: 'Cancel' },
+			{ text: 'Delete', onPress: () => this.delete() },
+		];
+		Alert.alert(title, message, buttons);
+	}
+
+	delete() {
+		this.setState({ loading: true });
+
+		const note = this.navParams.note;
+		note.delete()
+			.then(() => this.props.navigation.goBack() )
+			.catch(error => {
+				this.setState({ loading: false });
 			});
 	}
 }

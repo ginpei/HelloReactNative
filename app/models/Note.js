@@ -4,7 +4,7 @@ export default class Note {
 	constructor(data = {}) {
 		if (typeof data.val === 'function') {
 			const snapshot = data;
-			data = snapshot.val();
+			data = snapshot.val() || {};
 			data.key = snapshot.key;
 		}
 
@@ -48,6 +48,10 @@ export default class Note {
 
 	createKey() {
 		 this.key = Note.db.push().key;
+	}
+
+	delete() {
+		return this.db.set(null);
 	}
 
 	static get db() {

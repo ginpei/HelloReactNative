@@ -34,7 +34,14 @@ export default class NoteView extends Component {
 
 			this.listener = (snapshot) => {
 				const note = new Note(snapshot);
-				console.log('# NoteView: note is updated', note);
+				console.log('# NoteView: note is updated', note.key, note);
+
+				// deleted
+				if (!note.createdAt) {
+					this.props.navigation.goBack();
+					return;
+				}
+
 				this.setState({ note });
 				this.props.navigation.setParams({
 					title: note.title,
