@@ -6,6 +6,7 @@ import Account from '../screens/Account/Index.js';
 import Home from '../screens/Home/Index.js';
 import SignIn from '../screens/SignIn/Index.js';
 import NoteNew from '../screens/NoteNew/Index.js';
+import NoteEdit from '../screens/NoteEdit/Index.js';
 import NoteView from '../screens/NoteView/Index.js';
 
 function DrawerButton(props) {
@@ -58,6 +59,13 @@ export default StackNavigator({
 		screen: NoteNew,
 		navigationOptions: {
 			title: 'New Note',
+		},
+	},
+
+	NoteEdit: {
+		screen: NoteEdit,
+		navigationOptions: {
+			title: 'Edit Note',
 		},
 	},
 

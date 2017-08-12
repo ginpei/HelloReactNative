@@ -63,6 +63,12 @@ export default class NoteView extends Component {
 		const params = props.navigation.state.params;
 		return {
 			title: params ? params.title : 'Note',
+			headerRight: (
+				<Button
+					title="Edit"
+					onPress={() => props.navigation.navigate('NoteEdit', { note: params.note })}
+					/>
+			),
 		}
 	}
 }
