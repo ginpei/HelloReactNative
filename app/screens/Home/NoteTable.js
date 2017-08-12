@@ -9,6 +9,7 @@ import ReactNative, {
 import firebase from '../../config/firebase.js';
 import Note from '../../models/Note.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
+import CenteredMessage from '../../views/CenteredMessage/Index.js';
 import ShortMessage from '../../views/ShortMessage/Index.js';
 
 export default class Home extends React.Component {
@@ -33,6 +34,9 @@ export default class Home extends React.Component {
 	render() {
 		if (this.state.loading) {
 			return <LoadingIndicator />;
+		}
+		else if (this.state.notes.length < 1) {
+			return <CenteredMessage message="No notes. 🍣" />;
 		}
 
 		return (
