@@ -26,7 +26,6 @@ export default class Home extends React.Component {
 		Note.fetchAllFor(user)
 			.then(notes => this.setState({ loading: false, notes: notes }))
 			.catch(error => {
-				console.warn(' # NoteTable.componentWillMount - failed to fetch notes', error);
 				ShortMessage.show(`Failed to fetch notes: ${error && error.message}`);
 			});
 	}
