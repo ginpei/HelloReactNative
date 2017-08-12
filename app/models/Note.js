@@ -1,13 +1,18 @@
 import firebase from '../config/firebase.js';
 
 export default class Note {
-	constructor(key, data) {
+	constructor(key, data = {}) {
 		this.key = key;
 		this.userId = data.userId || '';
 		this.title = data.title || '';
 		this.description = data.description || '';
 		this.createdAt = data.createdAt || 0;
 		this.updatedAt = data.updatedAt || 0;
+	}
+
+	save() {
+		// TODO implement
+		return new Promise((_, reject) => setTimeout(_ => reject({ message: 'Wow' }), 1000));
 	}
 
 	static get db() {
