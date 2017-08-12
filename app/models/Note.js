@@ -2,6 +2,12 @@ import firebase from '../config/firebase.js';
 
 export default class Note {
 	constructor(data = {}) {
+		if (typeof data.val === 'function') {
+			const snapshot = data;
+			data = snapshot.val();
+			data.key = snapshot.key;
+		}
+
 		this.key = data.key || null;
 		this.userId = data.userId || '';
 		this.title = data.title || '';
