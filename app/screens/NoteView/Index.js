@@ -45,8 +45,10 @@ export default class NoteView extends Component {
 		const sUpdatedAt = new Date(note.updatedAt).toString();
 		return (
 			<BasicScreen>
-				<Text style={styles.title}>{note.title}</Text>
-				<Text style={styles.subtext}>Last Update: {sUpdatedAt}</Text>
+				<View style={styles.header}>
+					<Text style={styles.title}>{note.title}</Text>
+					<Text style={styles.updatedAt}>Last Update: {sUpdatedAt}</Text>
+				</View>
 				<Text>{note.description}</Text>
 			</BasicScreen>
 		);
@@ -72,10 +74,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
+	header: {
+		marginBottom: 10,
+	},
 	title: {
 		fontSize: 30,
 	},
-	subtext: {
+	updatedAt: {
 		color: '#999',
 	},
 });
