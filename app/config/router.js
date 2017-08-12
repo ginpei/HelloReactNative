@@ -4,9 +4,9 @@ import { DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation'
 
 import Account from '../screens/Account/Index.js';
 import Home from '../screens/Home/Index.js';
-import Second from '../screens/second/Index.js';
 import SignIn from '../screens/SignIn/Index.js';
 import NoteNew from '../screens/NoteNew/Index.js';
+import NoteView from '../screens/NoteView/Index.js';
 
 function DrawerButton(props) {
 	return (
@@ -61,8 +61,11 @@ export default StackNavigator({
 		},
 	},
 
-	Second: {
-		screen: Second,
+	NoteView: {
+		screen: NoteView,
+		// navigationOptions: {
+		// 	title: 'Note',
+		// },
 	},
 }, {
 	initialRouteName: "SignIn",
