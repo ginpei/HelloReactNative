@@ -38,9 +38,19 @@ export default class Note {
 		return firebase.db.ref('note');
 	}
 
-	static fetchAllFor(user) {
+	static getRefForUser(user) {
 		const query = Note.db.orderByChild('userId').equalTo(user.uid)
-		return query.once('value').then(snapshot => {
+		return query;
+	}
+
+	static fetchAllFor(user) {
+		return Note.getRefForUser(user).once('value').then(snapshot => {
+			const notes = Note.snapshotToArray(snapshot);
+			return Promise.resolve(notes);
+		});
+	}
+
+	static snapshotToArray(snapshot) {
 			const noteDataMap = snapshot.val() || {};
 			const notes = Object.keys(noteDataMap)
 				.map(key => {
@@ -50,8 +60,6 @@ export default class Note {
 					return note;
 				})
 				.sort((a, b) => b.updatedAt - a.updatedAt);
-
-			return Promise.resolve(notes);
-		});
+		return notes;
 	}
 }

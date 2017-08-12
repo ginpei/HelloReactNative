@@ -23,11 +23,10 @@ export default class Home extends Component {
 
 	componentWillMount() {
 		const user = firebase.user;
-		Note.fetchAllFor(user)
-			.then(notes => this.setState({ loading: false, notes: notes }))
-			.catch(error => {
-				ShortMessage.show(`Failed to fetch notes: ${error && error.message}`);
-			});
+		const db = Note.getRefForUser(user);
+		db.on('value', snapshot => {
+			this.setState({ loading: false, notes: Note.snapshotToArray(snapshot) });
+		});
 	}
 
 	render() {
