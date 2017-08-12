@@ -10,6 +10,13 @@ export default class Note {
 		this.updatedAt = data.updatedAt || 0;
 	}
 
+	get db() {
+		if (!this.key) {
+			throw new Error('Key needs to be specified.');
+		}
+		return Note.db.child(this.key);
+	}
+
 	save() {
 		if (!this.userId) {
 			return Promise.reject(new Error('User ID is not set.'));
@@ -19,23 +26,22 @@ export default class Note {
 			return Promise.reject(new Error('Title is required.'));
 		}
 
-		const updates = this._prepareDataPushing({
+		const updates = {
 			createdAt: this.createdAt || Date.now(),
 			description: this.description,
 			title: this.title,
 			updatedAt: Date.now(),
 			userId: this.userId,
-		});
-		console.log('# save', updates);
+		};
 
-		return Note.db.update(updates);
+		if (!this.key) {
+			this.createKey();
+		}
+		return this.db.set(updates);
 	}
 
-	_prepareDataPushing(data) {
-		const key = this.key || Note.db.push().key;
-		const names = Object.keys(data);
-		const updates = names.reduce((updates, name) => (updates[`${key}/${name}`] = data[name], updates), {})
-		return updates;
+	createKey() {
+		 this.key = Note.db.push().key;
 	}
 
 	static get db() {
