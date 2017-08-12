@@ -42,12 +42,14 @@ export default class Note {
 		const query = Note.db.orderByChild('userId').equalTo(user.uid)
 		return query.once('value').then(snapshot => {
 			const noteDataMap = snapshot.val() || {};
-			const notes = Object.keys(noteDataMap).map(key => {
-				const data = noteDataMap[key];
-				data.key = key;
-				const note = new Note(data);
-				return note;
-			});
+			const notes = Object.keys(noteDataMap)
+				.map(key => {
+					const data = noteDataMap[key];
+					data.key = key;
+					const note = new Note(data);
+					return note;
+				})
+				.sort((a, b) => b.updatedAt - a.updatedAt);
 
 			return Promise.resolve(notes);
 		});
