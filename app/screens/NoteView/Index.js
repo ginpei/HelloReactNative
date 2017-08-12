@@ -21,14 +21,26 @@ export default class NoteView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			note: this.navParams.note,
 		};
 	}
 
 	componentWillMount() {
-		if (this.navParams.note) {
+		const note = this.state.note
+		if (note) {
 			this.props.navigation.setParams({
-				title: this.navParams.note.title,
+				title: note.title,
 			});
+
+			this.listener = (snapshot) => {
+				const note = new Note(snapshot);
+				console.log('# NoteView: note is updated', note);
+				this.setState({ note });
+				this.props.navigation.setParams({
+					title: note.title,
+				});
+			};
+			note.db.on('value', this.listener);
 		}
 		else {
 			ShortMessage.show('Not found');
@@ -36,8 +48,13 @@ export default class NoteView extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		const note = this.state.note;
+		note.db.off('value', this.listener);
+	}
+
 	render() {
-		const note = this.navParams.note;
+		const note = this.state.note;
 		if (!note) {
 			return <Text>Not found.</Text>
 		}
