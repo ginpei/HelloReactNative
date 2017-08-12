@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import TitledTextInput from '../../views/TitledTextInput/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
@@ -22,22 +22,24 @@ export default class Home extends React.Component {
 		}
 
 		return (
-			<View style={styles.container}>
-				<TitledTextInput
-					label="Title"
-					value={this.state.title}
-					onChangeText={title => this.setState({ title })}
-					/>
-				<TitledTextInput
-					label="Description (Optional)"
-					value={this.state.description}
-					onChangeText={title => this.setState({ title })}
-					/>
-				<Button
-					title="Create"
-					onPress={() => this.create()}
-					/>
-			</View>
+			<ScrollView style={styles.scroll}>
+				<View style={styles.container}>
+					<TitledTextInput
+						label="Title"
+						value={this.state.title}
+						onChangeText={title => this.setState({ title })}
+						/>
+					<TitledTextInput
+						label="Description (Optional)"
+						value={this.state.description}
+						onChangeText={title => this.setState({ title })}
+						/>
+					<Button
+						title="Create"
+						onPress={() => this.create()}
+						/>
+				</View>
+			</ScrollView>
 		);
 	}
 
@@ -57,9 +59,11 @@ export default class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	scroll: {
 		flex: 1,
 		backgroundColor: '#fff',
+	},
+	container: {
 		padding: 16,
 	},
 });
