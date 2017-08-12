@@ -6,6 +6,7 @@ import Account from '../screens/Account/Index.js';
 import Home from '../screens/Home/Index.js';
 import Second from '../screens/second/Index.js';
 import SignIn from '../screens/SignIn/Index.js';
+import NoteNew from '../screens/NoteNew/Index.js';
 
 function DrawerButton(props) {
 	return (
@@ -32,6 +33,12 @@ export default StackNavigator({
 					return {
 						title: 'Home',
 						headerLeft: <DrawerButton {...props} />,
+						headerRight: (
+							<Button
+								title="Add"
+								onPress={() => props.navigation.navigate('NoteNew')}
+								/>
+						),
 					};
 				},
 			},
@@ -45,6 +52,13 @@ export default StackNavigator({
 				},
 			},
 		}),
+	},
+
+	NoteNew: {
+		screen: NoteNew,
+		navigationOptions: {
+			title: 'New Note',
+		},
 	},
 
 	Second: {
