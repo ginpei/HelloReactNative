@@ -41,11 +41,9 @@ export default class NoteEdit extends React.Component {
 		this.setState({ loading: true });
 
 		const { title, description } = this.state;
-		const note = new Note({
-			description,
-			title,
-			userId: firebase.user.uid,
-		});
+		const note = this.navParams.note;
+		note.title = title;
+		note.description = description;
 		note.save()
 			.then(_ => {
 				ShortMessage.show('Updated a note.');
