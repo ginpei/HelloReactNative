@@ -62,6 +62,7 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
 	list: {
+		backgroundColor: '#fff',
 	},
 	item: {
 		padding: 16,
