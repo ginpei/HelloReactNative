@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import NoteForm from '../../views/NoteForm/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
@@ -58,13 +57,3 @@ export default class NoteEdit extends React.Component {
 			});
 	}
 }
-
-const styles = StyleSheet.create({
-	scroll: {
-		flex: 1,
-		backgroundColor: '#fff',
-	},
-	container: {
-		padding: 16,
-	},
-});

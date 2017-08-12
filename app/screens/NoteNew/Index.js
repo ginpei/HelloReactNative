@@ -1,13 +1,16 @@
 import React from 'react';
-import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import TitledTextInput from '../../views/TitledTextInput/Index.js';
+import NoteForm from '../../views/NoteForm/Index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
 import ShortMessage from '../../views/ShortMessage/Index.js';
 import Note from '../../models/Note.js';
 import firebase from '../../config/firebase.js';
 
-export default class Home extends React.Component {
+export default class NoteNew extends React.Component {
+	get navParams() {
+		return this.props.navigation.state.params;
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -23,24 +26,13 @@ export default class Home extends React.Component {
 		}
 
 		return (
-			<ScrollView style={styles.scroll}>
-				<View style={styles.container}>
-					<TitledTextInput
-						label="Title"
-						value={this.state.title}
-						onChangeText={title => this.setState({ title })}
-						/>
-					<TitledTextInput
-						label="Description (Optional)"
-						value={this.state.description}
-						onChangeText={description => this.setState({ description })}
-						/>
-					<Button
-						title="Create"
-						onPress={() => this.create()}
-						/>
-				</View>
-			</ScrollView>
+			<NoteForm
+				description={this.state.description}
+				isNew={false}
+				title={this.state.title}
+				onChange={updates => this.setState(updates)}
+				onSubmit={() => this.create()}
+				/>
 		);
 	}
 
@@ -64,13 +56,3 @@ export default class Home extends React.Component {
 			});
 	}
 }
-
-const styles = StyleSheet.create({
-	scroll: {
-		flex: 1,
-		backgroundColor: '#fff',
-	},
-	container: {
-		padding: 16,
-	},
-});
