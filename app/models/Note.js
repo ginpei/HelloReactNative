@@ -15,6 +15,10 @@ export default class Note {
 			return Promise.reject(new Error('User ID is not set.'));
 		}
 
+		if (!this.title || !this.title.trim()) {
+			return Promise.reject(new Error('Title is required.'));
+		}
+
 		const updates = this._prepareDataPushing({
 			createdAt: this.createdAt || Date.now(),
 			description: this.description,
