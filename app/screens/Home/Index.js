@@ -41,9 +41,9 @@ export default class Home extends Component {
 		);
 	}
 
-	onItemPress({note}) {
+	onItemPress({ note }) {
 		const { navigate } = this.props.navigation;
-		navigate('Second', {note});
+		navigate('Second', { note });
 	}
 }
 

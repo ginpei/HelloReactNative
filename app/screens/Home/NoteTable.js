@@ -29,7 +29,7 @@ export default class Home extends React.Component {
 			<TouchableHighlight
 				title={note.title}
 				style={styles.note}
-				onPress={() => this.props.onItemPress({note})}>
+				onPress={() => this.props.onItemPress({ note })}>
 
 				<Text>{note.title}</Text>
 			</TouchableHighlight>
