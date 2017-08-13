@@ -38,9 +38,8 @@ export default class TextArea extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		width: '100%',
 	},
 	textInput: {
-		width: '100%',
+		borderBottomWidth: StyleSheet.hairlineWidth,
 	},
 });
