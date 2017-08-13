@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-	TextInput,
+	Button,
 	StyleSheet,
 	Text,
-	Button,
+	TextInput,
 	View
 } from 'react-native';
 
