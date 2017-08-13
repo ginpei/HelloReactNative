@@ -30,7 +30,7 @@ export default class NoteNew extends React.Component {
 			<BasicScreen>
 				<NoteForm
 					description={this.state.description}
-					isNew={false}
+					isNew={true}
 					title={this.state.title}
 					onChange={updates => this.setState(updates)}
 					onSubmit={() => this.create()}
