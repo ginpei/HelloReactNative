@@ -6,9 +6,7 @@ Using
 - React Navigation
 - Firebase Auth + DB
 
-![Screen shot: works perfectly on Android](./doc/android.png)
-
-![Screen shot: works perfectly on iOS](./doc/ios.png)
+![Screen shot: works perfectly on Android](./doc/android.png) ![Screen shot: works perfectly on iOS](./doc/ios.png)
 
 # Get started
 
