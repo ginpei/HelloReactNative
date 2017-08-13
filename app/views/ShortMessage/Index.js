@@ -5,7 +5,7 @@ export default class ShortMessage {
 	static show(message, options = {}) {
 		console.log('# ShortMessage::show', message, options);
 
-		if (Platform.os === 'ios') {
+		if (Platform.OS === 'ios') {
 			AlertIOS.alert('', message);
 		}
 		else {
