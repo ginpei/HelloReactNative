@@ -59,6 +59,12 @@ export default {
 		return p;
 	},
 
+	signUp() {
+		const p = firebase.auth().signInAnonymously()
+		p.then(user => this._saveSignedInUser(user))
+		return p;
+	},
+
 	signOut() {
 		this._saveSignedInUser(null);
 		return this._auth.signOut();

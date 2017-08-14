@@ -92,7 +92,16 @@ export default class SignIn extends Component {
 
 	signUp() {
 		ask( 'Do you want to create a new account without signing in?', () => {
-			console.debug('TODO sign in');
+			firebase.signUp()
+				.then(() => this.goToTop())
+				.catch(error => {
+					console.log('# failed to sign up', error);
+					this.setState({ loading: false });
+
+					this.setState({
+						errorMessage: `Failed to sign in; ${error.message}`,
+					});
+				});
 		});
 	}
 
