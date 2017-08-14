@@ -7,24 +7,54 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+import LoadingIndicator from '../../views/LoadingIndicator/index.js';
+import { ask } from '../../views/dialog/index.js';
 import firebase from '../../config/firebase.js';
 
 export default class Account extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			loading: false,
+		};
+	}
+
 	render() {
+		if (this.state.loading) {
+			return <LoadingIndicator />;
+		}
+
 		return (
 			<View style={styles.container}>
 				<Text>Account</Text>
 				<Button
 					title="Sign Out"
-					onPress={() => this.signOut()}
+					onPress={() => this.askSignOut()}
 					/>
 			</View>
 		);
 	}
 
+	askSignOut() {
+		if (firebase.anonymous) {
+			ask('If you sign out as anonymous, you will NOT see your notes again.\n\nAre you sure you want to sign out?', () => {
+				this.signOut();
+			});
+		}
+		else {
+			this.signOut();
+		}
+	}
+
 	signOut() {
-		firebase.signOut();
-		this.goToSignIn();
+		this.setState({ loading: true });
+		firebase.signOut()
+			.then(() => {
+				this.goToSignIn();
+			})
+			.catch(error => {
+				console.error('# signOut', error);
+			});
 	}
 
 	goToSignIn() {

@@ -22,6 +22,10 @@ export default {
 		return this.user !== null;
 	},
 
+	get anonymous() {
+		return this._auth.currentUser.providerData.length < 1;
+	},
+
 	init() {
 		if (this._initialized) {
 			console.log('# firebase has been already initialized.');
@@ -67,7 +71,11 @@ export default {
 
 	signOut() {
 		this._saveSignedInUser(null);
-		return this._auth.signOut();
+		const pDelete = this.anonymous ? this._auth.currentUser.delete() : Promise.resolve();
+		return pDelete
+			.then(() => {
+				return this._auth.signOut();
+			});
 	},
 
 	_saveSignedInUser(user) {
