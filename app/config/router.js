@@ -2,12 +2,12 @@ import React from 'react';
 import { Button } from 'react-native';
 import { DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation';
 
-import Account from '../screens/Account/Index.js';
-import Home from '../screens/Home/Index.js';
-import SignIn from '../screens/SignIn/Index.js';
-import NoteNew from '../screens/NoteNew/Index.js';
-import NoteEdit from '../screens/NoteEdit/Index.js';
-import NoteView from '../screens/NoteView/Index.js';
+import Account from '../screens/Account/index.js';
+import Home from '../screens/Home/index.js';
+import SignIn from '../screens/SignIn/index.js';
+import NoteNew from '../screens/NoteNew/index.js';
+import NoteEdit from '../screens/NoteEdit/index.js';
+import NoteView from '../screens/NoteView/index.js';
 
 function DrawerButton(props) {
 	return (

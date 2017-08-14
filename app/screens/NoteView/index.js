@@ -7,10 +7,10 @@ import {
 	View
 } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
-import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
-import BasicScreen from '../../views/BasicScreen/Index.js';
+import LoadingIndicator from '../../views/LoadingIndicator/index.js';
+import BasicScreen from '../../views/BasicScreen/index.js';
 import Note from '../../models/Note.js'
-import ShortMessage from '../../views/ShortMessage/Index.js';
+import ShortMessage from '../../views/ShortMessage/index.js';
 import firebase from '../../config/firebase.js';
 
 export default class NoteView extends Component {

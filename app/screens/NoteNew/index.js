@@ -1,9 +1,9 @@
 import React from 'react';
 
-import BasicScreen from '../../views/BasicScreen/Index.js';
-import NoteForm from '../../views/NoteForm/Index.js';
-import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
-import ShortMessage from '../../views/ShortMessage/Index.js';
+import BasicScreen from '../../views/BasicScreen/index.js';
+import NoteForm from '../../views/NoteForm/index.js';
+import LoadingIndicator from '../../views/LoadingIndicator/index.js';
+import ShortMessage from '../../views/ShortMessage/index.js';
 import Note from '../../models/Note.js';
 import firebase from '../../config/firebase.js';
 

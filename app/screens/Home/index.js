@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import NoteTable from './NoteTable.js'
 import { DrawerNavigator } from 'react-navigation';
-import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
+import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 import Note from '../../models/Note.js'
-import ShortMessage from '../../views/ShortMessage/Index.js';
+import ShortMessage from '../../views/ShortMessage/index.js';
 import firebase from '../../config/firebase.js';
 
 export default class Home extends Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-import TitledTextInput from '../../views/TitledTextInput/Index.js';
+import TitledTextInput from '../../views/TitledTextInput/index.js';
 
 export default class NoteForm extends React.Component {
 	render() {

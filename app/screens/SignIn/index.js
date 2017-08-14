@@ -7,11 +7,11 @@ import {
 	Button,
 	View
 } from 'react-native';
-import TitledTextInput from '../../views/TitledTextInput/Index.js';
+import TitledTextInput from '../../views/TitledTextInput/index.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
-import ShortMessage from '../../views/ShortMessage/Index.js';
-import LoadingIndicator from '../../views/LoadingIndicator/Index.js';
+import ShortMessage from '../../views/ShortMessage/index.js';
+import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 
 export default class SignIn extends Component {
 	constructor(props) {

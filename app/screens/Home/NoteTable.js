@@ -7,7 +7,7 @@ import ReactNative, {
 } from 'react-native';
 
 import Note from '../../models/Note.js';
-import CenteredMessage from '../../views/CenteredMessage/Index.js';
+import CenteredMessage from '../../views/CenteredMessage/index.js';
 
 export default class Home extends React.Component {
 	render() {
