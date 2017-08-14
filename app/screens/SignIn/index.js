@@ -11,6 +11,7 @@ import TitledTextInput from '../../views/TitledTextInput/index.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
 import ShortMessage from '../../views/ShortMessage/index.js';
+import { ask } from '../../views/dialog/index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 
 export default class SignIn extends Component {
@@ -64,6 +65,11 @@ export default class SignIn extends Component {
 					title="Sign In"
 					onPress={() => this.submit()}
 					/>
+				<Text>or</Text>
+				<Button
+					title="Anonymouse sign up"
+					onPress={() => this.signUp()}
+					/>
 			</View>
 		);
 	}
@@ -82,6 +88,12 @@ export default class SignIn extends Component {
 					errorMessage: `Failed to sign in; ${error.message}`,
 				});
 			});
+	}
+
+	signUp() {
+		ask( 'Do you want to create a new account without signing in?', () => {
+			console.debug('TODO sign in');
+		});
 	}
 
 	goToTop() {

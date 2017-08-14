@@ -5,6 +5,7 @@ import BasicScreen from '../../views/BasicScreen/index.js';
 import NoteForm from '../../views/NoteForm/index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 import ShortMessage from '../../views/ShortMessage/index.js';
+import { ask } from '../../views/dialog/index.js';
 import Note from '../../models/Note.js';
 import firebase from '../../config/firebase.js';
 
@@ -66,13 +67,10 @@ export default class NoteEdit extends React.Component {
 	}
 
 	askDelete() {
-		const title = null;
 		const message = 'Are you sure you want to delete this note?';
-		const buttons = [
-			{ text: 'Cancel' },
-			{ text: 'Delete', onPress: () => this.delete() },
-		];
-		Alert.alert(title, message, buttons);
+		ask(message, () => {
+			this.delete();
+		});
 	}
 
 	delete() {
