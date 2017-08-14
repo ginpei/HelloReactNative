@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
 	Button,
+	Platform,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -16,11 +17,16 @@ export default class TextArea extends Component {
 	}
 
 	render() {
+		const textInputStyle = [styles.textInput];
+		if (Platform.OS === 'ios') {
+			textInputStyle.push(styles.textInputIOS);
+		}
+
 		return (
 			<View style={[styles.container, this.props.style]}>
 				<Text>{this.props.label}</Text>
 				<TextInput
-					style={styles.textInput}
+					style={textInputStyle}
 					value={this.state.value}
 					{...this.getInputProps(this.props)}
 					/>
@@ -40,6 +46,8 @@ const styles = StyleSheet.create({
 	container: {
 	},
 	textInput: {
+	},
+	textInputIOS: {
 		borderBottomWidth: StyleSheet.hairlineWidth,
 	},
 });
