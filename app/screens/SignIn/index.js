@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flex: 1,
 		justifyContent: 'center',
-		margin: '5%',
+		margin: 16,
 	},
 	titledTextInput: {
 		width: '100%',
