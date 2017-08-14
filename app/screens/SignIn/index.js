@@ -17,6 +17,7 @@ export default class SignIn extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			errorMessage: '',
 			loading: true,
 			email: 'anonymous@example.com',
 			password: '123123',
@@ -56,6 +57,9 @@ export default class SignIn extends Component {
 					secureTextEntry={true}
 					onChangeText={(text) => this.setState({ password: text })}
 					/>
+				<Text
+					style={styles.errorMessage}
+					>{this.state.errorMessage}</Text>
 				<Button
 					title="Sign In"
 					onPress={() => this.submit()}
@@ -74,8 +78,9 @@ export default class SignIn extends Component {
 				console.log('# submit: failed', error);
 				this.setState({ loading: false });
 
-				const message = `Failed to sign in; ${error.message}`;
-				ShortMessage.show(message);
+				this.setState({
+					errorMessage: `Failed to sign in; ${error.message}`,
+				});
 			});
 	}
 
@@ -99,5 +104,8 @@ const styles = StyleSheet.create({
 	},
 	titledTextInput: {
 		width: '100%',
+	},
+	errorMessage: {
+		color: '#f00',
 	},
 });
