@@ -92,6 +92,8 @@ export default class SignIn extends Component {
 
 	signUp() {
 		ask( 'Do you want to create a new account without signing in?', () => {
+			this.setState({ loading: true });
+
 			firebase.signUp()
 				.then(() => this.goToTop())
 				.catch(error => {
