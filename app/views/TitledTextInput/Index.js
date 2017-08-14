@@ -44,6 +44,7 @@ export default class TextArea extends Component {
 
 const styles = StyleSheet.create({
 	container: {
+		marginBottom: 16,
 	},
 	textInput: {
 	},
