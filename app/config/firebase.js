@@ -70,6 +70,11 @@ export default {
 		return p;
 	},
 
+	linkToEmail(email, password) {
+		var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+		return this._auth.currentUser.linkWithCredential(credential);
+	},
+
 	signOut() {
 		const user = this.user;
 		this._saveSignedInUser(null);

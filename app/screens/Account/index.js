@@ -44,6 +44,7 @@ export default class Account extends Component {
 			<Text style={styles.text}>Anonymous account</Text>,
 			<Button
 				title="Sign in with Email and password"
+				onPress={() => this.signIn()}
 				/>,
 		];
 	}
@@ -52,6 +53,10 @@ export default class Account extends Component {
 		return [
 			<Text style={styles.text}>Signed in as {firebase.user.email}</Text>,
 		];
+	}
+
+	signIn() {
+		this.props.navigation.navigate('SignIn');
 	}
 
 	askSignOut() {
@@ -69,18 +74,18 @@ export default class Account extends Component {
 		this.setState({ loading: true });
 		firebase.signOut()
 			.then(() => {
-				this.goToSignIn();
+				this.goTo('Boot');
 			})
 			.catch(error => {
 				console.error('# signOut', error);
 			});
 	}
 
-	goToSignIn() {
+	goTo(routeName) {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
-				NavigationActions.navigate({ routeName: 'Boot' }),
+				NavigationActions.navigate({ routeName: routeName }),
 			],
 		});
 		this.props.navigation.dispatch(resetAction);

@@ -21,6 +21,7 @@ export default class SignIn extends Component {
 			loading: false,
 			email: 'anonymous@example.com',
 			password: '123123',
+			signedIn: firebase.signedIn,
 		};
 	}
 
@@ -37,11 +38,11 @@ export default class SignIn extends Component {
 					errorMessage={this.state.errorMessage}
 					onSubmit={(data) => this.signIn(data)}
 					/>
-				<Text>or</Text>
-				<Button
+				{!this.state.signedIn && <Text>or</Text>}
+				{!this.state.signedIn && <Button
 					title="Sign up"
 					onPress={() => this.signUp()}
-					/>
+					/>}
 			</View>
 		);
 	}
@@ -50,16 +51,24 @@ export default class SignIn extends Component {
 		console.log('# submit', this.state);
 
 		this.setState({ email, password, loading: true });
-		firebase.signIn(email, password)
-			.then(user => this.goToTop())
-			.catch(error => {
-				console.log('# submit: failed', error);
-				this.setState({ loading: false });
+		let p;
+		if (this.state.signedIn) {
+			p = firebase.linkToEmail(email, password)
+				.then(() => this.props.navigation.goBack())
+		}
+		else {
+			p = firebase.signIn(email, password)
+				.then(user => this.goTo('Top'));
+		}
 
-				this.setState({
-					errorMessage: `Failed to sign in; ${error.message}`,
-				});
+		p.catch(error => {
+			console.log('# submit: failed', error);
+			this.setState({ loading: false });
+
+			this.setState({
+				errorMessage: `Failed to sign in; ${error.message}`,
 			});
+		});
 	}
 
 	signUp() {
@@ -67,7 +76,7 @@ export default class SignIn extends Component {
 			this.setState({ loading: true });
 
 			firebase.signUp()
-				.then(() => this.goToTop())
+				.then(() => this.goTo('Top'))
 				.catch(error => {
 					console.log('# failed to sign up', error);
 					this.setState({ loading: false });
@@ -79,11 +88,11 @@ export default class SignIn extends Component {
 		});
 	}
 
-	goToTop() {
+	goTo(routeName) {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
-				NavigationActions.navigate({ routeName: 'Top' }),
+				NavigationActions.navigate({ routeName: routeName }),
 			],
 		});
 		this.props.navigation.dispatch(resetAction);
