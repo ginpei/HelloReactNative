@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+import BasicScreen from '../../views/BasicScreen/index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 import { ask } from '../../views/dialog/index.js';
 import firebase from '../../config/firebase.js';
@@ -25,14 +26,32 @@ export default class Account extends Component {
 		}
 
 		return (
-			<View style={styles.container}>
-				<Text>Account</Text>
+			<BasicScreen>
+				<View style={styles.accountInformation}>
+					{ firebase.anonymous ? this.renderAnonymous() : this.renderEmail() }
+				</View>
 				<Button
 					title="Sign Out"
+					color="#f00"
 					onPress={() => this.askSignOut()}
 					/>
-			</View>
+			</BasicScreen>
 		);
+	}
+
+	renderAnonymous() {
+		return [
+			<Text style={styles.text}>Anonymous account</Text>,
+			<Button
+				title="Sign in with Email and password"
+				/>,
+		];
+	}
+
+	renderEmail() {
+		return [
+			<Text style={styles.text}>Signed in as {firebase.user.email}</Text>,
+		];
 	}
 
 	askSignOut() {
@@ -74,5 +93,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
+	},
+	accountInformation: {
+		marginBottom: 16,
+	},
+	text: {
+		height: 32,
 	},
 });
