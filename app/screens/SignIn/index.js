@@ -107,9 +107,10 @@ export default class SignIn extends Component {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
+		backgroundColor: '#fff',
 		flex: 1,
 		justifyContent: 'center',
-		margin: 16,
+		padding: 16,
 	},
 	titledTextInput: {
 		width: '100%',
