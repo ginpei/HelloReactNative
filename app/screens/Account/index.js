@@ -80,7 +80,7 @@ export default class Account extends Component {
 		const resetAction = NavigationActions.reset({
 			index: 0,
 			actions: [
-				NavigationActions.navigate({ routeName: 'SignIn' }),
+				NavigationActions.navigate({ routeName: 'Boot' }),
 			],
 		});
 		this.props.navigation.dispatch(resetAction);

@@ -3,6 +3,7 @@ import { Button } from 'react-native';
 import { DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation';
 
 import Account from '../screens/Account/index.js';
+import Boot from '../screens/Boot/index.js';
 import Home from '../screens/Home/index.js';
 import SignIn from '../screens/SignIn/index.js';
 import NoteNew from '../screens/NoteNew/index.js';
@@ -19,6 +20,13 @@ function DrawerButton(props) {
 }
 
 export default StackNavigator({
+	Boot: {
+		screen: Boot,
+		navigationOptions: {
+			header: null,
+		},
+	},
+
 	SignIn: {
 		screen: SignIn,
 		navigationOptions: {
@@ -76,5 +84,5 @@ export default StackNavigator({
 		// },
 	},
 }, {
-	initialRouteName: "SignIn",
+	initialRouteName: 'Boot',
 });

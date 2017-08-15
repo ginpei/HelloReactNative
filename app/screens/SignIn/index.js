@@ -18,22 +18,10 @@ export default class SignIn extends Component {
 		super(props)
 		this.state = {
 			errorMessage: '',
-			loading: true,
+			loading: false,
 			email: 'anonymous@example.com',
 			password: '123123',
 		};
-	}
-
-	componentWillMount() {
-		firebase.initAuth()
-			.then(_ => {
-				if (firebase.signedIn) {
-					this.goToTop();
-				}
-				else {
-					this.setState({ loading: false });
-				}
-			});
 	}
 
 	render() {
