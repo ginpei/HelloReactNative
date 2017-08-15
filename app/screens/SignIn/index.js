@@ -49,7 +49,7 @@ export default class SignIn extends Component {
 					email={this.state.email}
 					password={this.state.password}
 					errorMessage={this.state.errorMessage}
-					onSubmit={(data) => this.onSignIn(data)}
+					onSubmit={(data) => this.signIn(data)}
 					/>
 				<Text>or</Text>
 				<Button
@@ -60,7 +60,7 @@ export default class SignIn extends Component {
 		);
 	}
 
-	onSignIn({ email, password }) {
+	signIn({ email, password }) {
 		console.log('# submit', this.state);
 
 		this.setState({ email, password, loading: true });
