@@ -82,4 +82,11 @@ export default class Note {
 				.sort((a, b) => b.updatedAt - a.updatedAt);
 		return notes;
 	}
+
+	static removeAllFor(user) {
+		return Note.getRefForUser(user).once('value').then(snapshot => {
+			const notes = Note.snapshotToArray(snapshot);
+			return Promise.all(notes.map(note => note.delete()));
+		});
+	}
 }

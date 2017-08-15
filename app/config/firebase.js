@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import cred from '../../cred.json';
+import Note from '../models/Note.js';
 
 export default {
 	_initialized: false,
@@ -70,8 +71,18 @@ export default {
 	},
 
 	signOut() {
+		const user = this.user;
 		this._saveSignedInUser(null);
-		const pDelete = this.anonymous ? this._auth.currentUser.delete() : Promise.resolve();
+
+		let pDelete;
+		if (this.anonymous) {
+			pDelete = Note.removeAllFor(user)
+					.then(() => this._auth.currentUser.delete());
+		}
+		else {
+			pDelete = Promise.resolve();
+		}
+
 		return pDelete
 			.then(() => {
 				return this._auth.signOut();
