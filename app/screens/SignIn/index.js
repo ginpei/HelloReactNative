@@ -53,7 +53,7 @@ export default class SignIn extends Component {
 					/>
 				<Text>or</Text>
 				<Button
-					title="Anonymouse sign up"
+					title="Sign up"
 					onPress={() => this.signUp()}
 					/>
 			</View>
