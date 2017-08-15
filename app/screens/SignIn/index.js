@@ -13,6 +13,7 @@ import { NavigationActions } from 'react-navigation'
 import ShortMessage from '../../views/ShortMessage/index.js';
 import { ask } from '../../views/dialog/index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/index.js';
+import SignInForm from '../../views/SignInForm/index.js';
 
 export default class SignIn extends Component {
 	constructor(props) {
@@ -44,26 +45,11 @@ export default class SignIn extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Text>{this.props.text}</Text>
-				<TitledTextInput
-					style={styles.titledTextInput}
-					label="Email"
-					value={this.state.email}
-					onChangeText={(text) => this.setState({ email: text })}
-					/>
-				<TitledTextInput
-					style={styles.titledTextInput}
-					label="Password"
-					value={this.state.password}
-					secureTextEntry={true}
-					onChangeText={(text) => this.setState({ password: text })}
-					/>
-				<Text
-					style={styles.errorMessage}
-					>{this.state.errorMessage}</Text>
-				<Button
-					title="Sign In"
-					onPress={() => this.submit()}
+				<SignInForm
+					email={this.state.email}
+					password={this.state.password}
+					errorMessage={this.state.errorMessage}
+					onSubmit={(data) => this.onSignIn(data)}
 					/>
 				<Text>or</Text>
 				<Button
@@ -74,11 +60,11 @@ export default class SignIn extends Component {
 		);
 	}
 
-	submit() {
+	onSignIn({ email, password }) {
 		console.log('# submit', this.state);
 
-		this.setState({ loading: true });
-		firebase.signIn(this.state.email, this.state.password)
+		this.setState({ email, password, loading: true });
+		firebase.signIn(email, password)
 			.then(user => this.goToTop())
 			.catch(error => {
 				console.log('# submit: failed', error);
