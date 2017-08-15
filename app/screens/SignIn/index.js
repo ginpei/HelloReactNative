@@ -7,10 +7,8 @@ import {
 	Button,
 	View
 } from 'react-native';
-import TitledTextInput from '../../views/TitledTextInput/index.js';
 import firebase from '../../config/firebase.js';
 import { NavigationActions } from 'react-navigation'
-import ShortMessage from '../../views/ShortMessage/index.js';
 import { ask } from '../../views/dialog/index.js';
 import LoadingIndicator from '../../views/LoadingIndicator/index.js';
 import SignInForm from '../../views/SignInForm/index.js';
@@ -111,11 +109,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		padding: 16,
-	},
-	titledTextInput: {
-		width: '100%',
-	},
-	errorMessage: {
-		color: '#f00',
 	},
 });
