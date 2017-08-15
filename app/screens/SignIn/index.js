@@ -54,7 +54,13 @@ export default class SignIn extends Component {
 		let p;
 		if (this.state.signedIn) {
 			p = firebase.linkToEmail(email, password)
-				.then(() => this.props.navigation.goBack())
+				.then(() => {
+					const callback = this.props.navigation.state.params.onSignIn;
+					if (typeof callback === 'function') {
+						callback();
+					}
+					this.props.navigation.goBack()
+				});
 		}
 		else {
 			p = firebase.signIn(email, password)

@@ -16,6 +16,7 @@ export default class Account extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			anonymous: firebase.anonymous,
 			loading: false,
 		};
 	}
@@ -28,7 +29,7 @@ export default class Account extends Component {
 		return (
 			<BasicScreen>
 				<View style={styles.accountInformation}>
-					{ firebase.anonymous ? this.renderAnonymous() : this.renderEmail() }
+					{ this.state.anonymous ? this.renderAnonymous() : this.renderEmail() }
 				</View>
 				<Button
 					title="Sign Out"
@@ -56,7 +57,11 @@ export default class Account extends Component {
 	}
 
 	signIn() {
-		this.props.navigation.navigate('SignIn');
+		this.props.navigation.navigate('SignIn', { onSignIn: () => this.recheckAnonymous() });
+	}
+
+	recheckAnonymous() {
+		this.setState({ anonymous: firebase.anonymous });
 	}
 
 	askSignOut() {
